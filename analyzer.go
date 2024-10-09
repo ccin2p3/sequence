@@ -18,14 +18,15 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"fmt"
-	"gitlab.in2p3.fr/cc-in2p3-system/sequence/models"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 	"unicode"
 
-	"github.com/willf/bitset"
+	"gitlab.in2p3.fr/cc-in2p3-system/sequence/models"
+
+	"github.com/bits-and-blooms/bitset"
 	"github.com/zhenjl/porter2"
 	"github.com/zhenjl/xparse/etld"
 )
