@@ -1,9 +1,10 @@
 package syslog_ng_pattern_db
 
 import (
+	"testing"
+
 	"github.com/stretchr/testify/require"
 	"gitlab.in2p3.fr/cc-in2p3-system/sequence"
-	"testing"
 )
 
 var (

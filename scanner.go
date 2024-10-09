@@ -28,83 +28,84 @@ import (
 //
 // For example, the following message
 //
-//   Jan 12 06:49:42 irc sshd[7034]: Failed password for root from 218.161.81.238 port 4228 ssh2
+//	Jan 12 06:49:42 irc sshd[7034]: Failed password for root from 218.161.81.238 port 4228 ssh2
 //
 // Returns the following Sequence:
 //
-// 	Sequence{
-// 		Token{TokenTime, TagUnknown, "Jan 12 06:49:42"},
-// 		Token{TokenLiteral, TagUnknown, "irc"},
-// 		Token{TokenLiteral, TagUnknown, "sshd"},
-// 		Token{TokenLiteral, TagUnknown, "["},
-// 		Token{TokenInteger, TagUnknown, "7034"},
-// 		Token{TokenLiteral, TagUnknown, "]"},
-// 		Token{TokenLiteral, TagUnknown, ":"},
-// 		Token{TokenLiteral, TagUnknown, "Failed"},
-// 		Token{TokenLiteral, TagUnknown, "password"},
-// 		Token{TokenLiteral, TagUnknown, "for"},
-// 		Token{TokenLiteral, TagUnknown, "root"},
-// 		Token{TokenLiteral, TagUnknown, "from"},
-// 		Token{TokenIPv4, TagUnknown, "218.161.81.238"},
-// 		Token{TokenLiteral, TagUnknown, "port"},
-// 		Token{TokenInteger, TagUnknown, "4228"},
-// 		Token{TokenLiteral, TagUnknown, "ssh2"},
-// 	},
+//	Sequence{
+//		Token{TokenTime, TagUnknown, "Jan 12 06:49:42"},
+//		Token{TokenLiteral, TagUnknown, "irc"},
+//		Token{TokenLiteral, TagUnknown, "sshd"},
+//		Token{TokenLiteral, TagUnknown, "["},
+//		Token{TokenInteger, TagUnknown, "7034"},
+//		Token{TokenLiteral, TagUnknown, "]"},
+//		Token{TokenLiteral, TagUnknown, ":"},
+//		Token{TokenLiteral, TagUnknown, "Failed"},
+//		Token{TokenLiteral, TagUnknown, "password"},
+//		Token{TokenLiteral, TagUnknown, "for"},
+//		Token{TokenLiteral, TagUnknown, "root"},
+//		Token{TokenLiteral, TagUnknown, "from"},
+//		Token{TokenIPv4, TagUnknown, "218.161.81.238"},
+//		Token{TokenLiteral, TagUnknown, "port"},
+//		Token{TokenInteger, TagUnknown, "4228"},
+//		Token{TokenLiteral, TagUnknown, "ssh2"},
+//	},
 //
 // The following message
 //
-//   id=firewall time="2005-03-18 14:01:43" fw=TOPSEC priv=4 recorder=kernel type=conn policy=504 proto=TCP rule=deny src=210.82.121.91 sport=4958 dst=61.229.37.85 dport=23124 smac=00:0b:5f:b2:1d:80 dmac=00:04:c1:8b:d8:82
+//	id=firewall time="2005-03-18 14:01:43" fw=TOPSEC priv=4 recorder=kernel type=conn policy=504 proto=TCP rule=deny src=210.82.121.91 sport=4958 dst=61.229.37.85 dport=23124 smac=00:0b:5f:b2:1d:80 dmac=00:04:c1:8b:d8:82
 //
 // Will return
-// 	Sequence{
-// 		Token{TokenLiteral, TagUnknown, "id"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenLiteral, TagUnknown, "firewall"},
-// 		Token{TokenLiteral, TagUnknown, "time"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenLiteral, TagUnknown, "\""},
-// 		Token{TokenTime, TagUnknown, "2005-03-18 14:01:43"},
-// 		Token{TokenLiteral, TagUnknown, "\""},
-// 		Token{TokenLiteral, TagUnknown, "fw"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenLiteral, TagUnknown, "TOPSEC"},
-// 		Token{TokenLiteral, TagUnknown, "priv"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenInteger, TagUnknown, "4"},
-// 		Token{TokenLiteral, TagUnknown, "recorder"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenLiteral, TagUnknown, "kernel"},
-// 		Token{TokenLiteral, TagUnknown, "type"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenLiteral, TagUnknown, "conn"},
-// 		Token{TokenLiteral, TagUnknown, "policy"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenInteger, TagUnknown, "504"},
-// 		Token{TokenLiteral, TagUnknown, "proto"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenLiteral, TagUnknown, "TCP"},
-// 		Token{TokenLiteral, TagUnknown, "rule"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenLiteral, TagUnknown, "deny"},
-// 		Token{TokenLiteral, TagUnknown, "src"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenIPv4, TagUnknown, "210.82.121.91"},
-// 		Token{TokenLiteral, TagUnknown, "sport"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenInteger, TagUnknown, "4958"},
-// 		Token{TokenLiteral, TagUnknown, "dst"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenIPv4, TagUnknown, "61.229.37.85"},
-// 		Token{TokenLiteral, TagUnknown, "dport"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenInteger, TagUnknown, "23124"},
-// 		Token{TokenLiteral, TagUnknown, "smac"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenMac, TagUnknown, "00:0b:5f:b2:1d:80"},
-// 		Token{TokenLiteral, TagUnknown, "dmac"},
-// 		Token{TokenLiteral, TagUnknown, "="},
-// 		Token{TokenMac, TagUnknown, "00:04:c1:8b:d8:82"},
-// 	}
+//
+//	Sequence{
+//		Token{TokenLiteral, TagUnknown, "id"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenLiteral, TagUnknown, "firewall"},
+//		Token{TokenLiteral, TagUnknown, "time"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenLiteral, TagUnknown, "\""},
+//		Token{TokenTime, TagUnknown, "2005-03-18 14:01:43"},
+//		Token{TokenLiteral, TagUnknown, "\""},
+//		Token{TokenLiteral, TagUnknown, "fw"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenLiteral, TagUnknown, "TOPSEC"},
+//		Token{TokenLiteral, TagUnknown, "priv"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenInteger, TagUnknown, "4"},
+//		Token{TokenLiteral, TagUnknown, "recorder"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenLiteral, TagUnknown, "kernel"},
+//		Token{TokenLiteral, TagUnknown, "type"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenLiteral, TagUnknown, "conn"},
+//		Token{TokenLiteral, TagUnknown, "policy"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenInteger, TagUnknown, "504"},
+//		Token{TokenLiteral, TagUnknown, "proto"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenLiteral, TagUnknown, "TCP"},
+//		Token{TokenLiteral, TagUnknown, "rule"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenLiteral, TagUnknown, "deny"},
+//		Token{TokenLiteral, TagUnknown, "src"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenIPv4, TagUnknown, "210.82.121.91"},
+//		Token{TokenLiteral, TagUnknown, "sport"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenInteger, TagUnknown, "4958"},
+//		Token{TokenLiteral, TagUnknown, "dst"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenIPv4, TagUnknown, "61.229.37.85"},
+//		Token{TokenLiteral, TagUnknown, "dport"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenInteger, TagUnknown, "23124"},
+//		Token{TokenLiteral, TagUnknown, "smac"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenMac, TagUnknown, "00:0b:5f:b2:1d:80"},
+//		Token{TokenLiteral, TagUnknown, "dmac"},
+//		Token{TokenLiteral, TagUnknown, "="},
+//		Token{TokenMac, TagUnknown, "00:04:c1:8b:d8:82"},
+//	}
 type Scanner struct {
 	seq Sequence
 	msg *Message
@@ -198,16 +199,16 @@ const (
 //   - all {, }, [, ], ", characters are removed
 //   - colon between key and value are changed to "="
 //   - nested objects have their keys concatenated with ".", so a json string like
-//   		"userIdentity": {"type": "IAMUser"}
+//     "userIdentity": {"type": "IAMUser"}
 //     will be returned as
-//   		userIdentity.type=IAMUser
+//     userIdentity.type=IAMUser
 //   - arrays are flattened by appending an index number to the end of the key,
 //     starting with 0, so a json string like
-//   		{"value":[{"open":"2014-08-16T13:00:00.000+0000"}]}
+//     {"value":[{"open":"2014-08-16T13:00:00.000+0000"}]}
 //     will be returned as
-//   		value.0.open = 2014-08-16T13:00:00.000+0000
+//     value.0.open = 2014-08-16T13:00:00.000+0000
 //   - skips any key that has an empty value, so json strings like
-//   		"reference":""		or		"filterSet": {}
+//     "reference":""		or		"filterSet": {}
 //     will not show up in the Sequence
 func (this *Scanner) ScanJson(s string) (Sequence, bool, error) {
 	this.msg.Data = s
@@ -510,8 +511,8 @@ func (this *Scanner) ScanJson(s string) (Sequence, bool, error) {
 	return this.seq, isJson, nil
 }
 
-//This is essentially the same function as Scan Json about but it preserves the structure of the message for text matching.
-//It does not remove spaces, commas or brackets.
+// This is essentially the same function as Scan Json about but it preserves the structure of the message for text matching.
+// It does not remove spaces, commas or brackets.
 func (this *Scanner) ScanJson_Preserve(s string) (Sequence, bool, error) {
 	var (
 		err error

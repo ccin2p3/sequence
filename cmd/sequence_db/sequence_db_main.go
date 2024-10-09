@@ -232,7 +232,7 @@ func analyzebyservice(cmd *cobra.Command, args []string) {
 						if col, ok := partitionMap[len(seq)]; ok {
 							col.Records = append(col.Records, l)
 							partitionMap[len(seq)] = col
-						}else{
+						} else {
 							col.Records = append(col.Records, l)
 							partitionMap[len(seq)] = col
 						}
@@ -243,7 +243,7 @@ func analyzebyservice(cmd *cobra.Command, args []string) {
 			//analyzer.Finalize()
 			standardLogger.HandleDebug("Parsed statistics updated, new messages scanned and grouped.")
 			standardLogger.HandleDebug("Starting analysis of json messages")
-			for _, l := range jCol.Records{
+			for _, l := range jCol.Records {
 				seq, _, _ := sequence.ScanMessage(scanner, l.Message, format)
 				aseq, err = jsonParser.Parse(seq)
 				mtype = "json"

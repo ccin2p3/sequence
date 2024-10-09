@@ -2,11 +2,12 @@ package syslog_ng_pattern_db
 
 import (
 	"fmt"
-	"gitlab.in2p3.fr/cc-in2p3-system/sequence"
-	"gopkg.in/yaml.v3"
 	"math"
 	"os"
 	"time"
+
+	"gitlab.in2p3.fr/cc-in2p3-system/sequence"
+	"gopkg.in/yaml.v3"
 )
 
 type yPatternDB struct {
@@ -14,7 +15,7 @@ type yPatternDB struct {
 	Rulesets map[string]yRuleset `yaml:"coloss::patterndb::simple::ruleset"`
 }
 
-//This represents a rule section in the sys-log ng yaml file
+// This represents a rule section in the sys-log ng yaml file
 type yRule struct {
 	Ruleset   string         `yaml:"ruleset"`
 	RuleClass string         `yaml:"ruleclass"`
@@ -31,7 +32,7 @@ type yRuleValues struct {
 	DateLastMatched string  `yaml:"seq-last-match"`
 }
 
-//This represents a ruleset section in the sys-log ng yaml file
+// This represents a ruleset section in the sys-log ng yaml file
 type yRuleset struct {
 	Pubdate  string
 	ID       string `yaml:"id,omitempty"`

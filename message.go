@@ -61,7 +61,7 @@ const (
 	hexColon
 )
 
-//This is used in combination with scan the patterns to find a valid tag position.
+// This is used in combination with scan the patterns to find a valid tag position.
 func isValidTokenStartPosition(start int, pos []int) bool {
 	for _, p := range pos {
 		if p == start {
@@ -71,7 +71,7 @@ func isValidTokenStartPosition(start int, pos []int) bool {
 	return false
 }
 
-//This is used in combination with scan the patterns to find a valid tag position.
+// This is used in combination with scan the patterns to find a valid tag position.
 func getNextTokenStartPosition(start int, pos []int) int {
 	for _, p := range pos {
 		if p > start {
@@ -548,23 +548,23 @@ func (this *Message) tokenStep(i int, r rune, nr string) bool {
 //
 // The ipv6 rules are:
 // (http://computernetworkingnotes.com/ipv6-features-concepts-and-configurations/ipv6-address-types-and-formats.html)
-// - Whereas IPv4 addresses use a dotted-decimal format, where each byte ranges from
-//   0 to 255.
-// - IPv6 addresses use eight sets of four hexadecimal addresses (16 bits in each set),
-//   separated by a colon (:), like this: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
-//   (x would be a hexadecimal value). This notation is commonly called string notation.
-// - Hexadecimal values can be displayed in either lower- or upper-case for the numbers
-//   A–F.
-// - A leading zero in a set of numbers can be omitted; for example, you could either
-//   enter 0012 or 12 in one of the eight tags—both are correct.
-// - If you have successive tags of zeroes in an IPv6 address, you can represent
-//   them as two colons (::). For example,0:0:0:0:0:0:0:5 could be represented as ::5;
-//   and ABC:567:0:0:8888:9999:1111:0 could be represented asABC:567::8888:9999:1111:0.
-//   However, you can only do this once in the address: ABC::567::891::00 would be
-//   invalid since ::appears more than once in the address. The reason for this
-//   limitation is that if you had two or more repetitions, you wouldn’t know how many
-//   sets of zeroes were being omitted from each part. An unspecified address is
-//   represented as ::, since it contains all zeroes.
+//   - Whereas IPv4 addresses use a dotted-decimal format, where each byte ranges from
+//     0 to 255.
+//   - IPv6 addresses use eight sets of four hexadecimal addresses (16 bits in each set),
+//     separated by a colon (:), like this: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
+//     (x would be a hexadecimal value). This notation is commonly called string notation.
+//   - Hexadecimal values can be displayed in either lower- or upper-case for the numbers
+//     A–F.
+//   - A leading zero in a set of numbers can be omitted; for example, you could either
+//     enter 0012 or 12 in one of the eight tags—both are correct.
+//   - If you have successive tags of zeroes in an IPv6 address, you can represent
+//     them as two colons (::). For example,0:0:0:0:0:0:0:5 could be represented as ::5;
+//     and ABC:567:0:0:8888:9999:1111:0 could be represented asABC:567::8888:9999:1111:0.
+//     However, you can only do this once in the address: ABC::567::891::00 would be
+//     invalid since ::appears more than once in the address. The reason for this
+//     limitation is that if you had two or more repetitions, you wouldn’t know how many
+//     sets of zeroes were being omitted from each part. An unspecified address is
+//     represented as ::, since it contains all zeroes.
 //
 // first return value indicates whether this is a valid hex string
 // second return value indicates whether to stop scanning

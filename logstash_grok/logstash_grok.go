@@ -1,9 +1,9 @@
-//This package is solely for the transformation and the output to file of sequence patterns found in server logs
-//for use with Logstash's grok parser. The transformation is solid, but not perfect and this is designed to assist
-//a system administrator to create the patterns, not to be a full automation of the process.
-//The outputs for Grok have been tested with an online grok pattern tester, but not with a live system like the
-//Syslog-ng patterndB transformations.
-//There is a possibility of duplication of patterns if the services that log have similar messages.
+// This package is solely for the transformation and the output to file of sequence patterns found in server logs
+// for use with Logstash's grok parser. The transformation is solid, but not perfect and this is designed to assist
+// a system administrator to create the patterns, not to be a full automation of the process.
+// The outputs for Grok have been tested with an online grok pattern tester, but not with a live system like the
+// Syslog-ng patterndB transformations.
+// There is a possibility of duplication of patterns if the services that log have similar messages.
 package logstash_grok
 
 import (
@@ -51,9 +51,9 @@ func readConfig(file string) error {
 	return nil
 }
 
-//This function takes patterns created by the sequence module and outputs them in a grok format.
-//This translation is only lighly tested and as with any translation is not always perfect.
-//Transformed patterns need to be reviewed before use in production.
+// This function takes patterns created by the sequence module and outputs them in a grok format.
+// This translation is only lighly tested and as with any translation is not always perfect.
+// Transformed patterns need to be reviewed before use in production.
 func OutputToFiles(outfile string, config string, complexitylevel float64, cmap map[string]sequence.AnalyzerResult, thresholdType string, thresholdValue string) (int, string, error) {
 	var (
 		err    error
@@ -101,7 +101,7 @@ func OutputToFiles(outfile string, config string, complexitylevel float64, cmap 
 	return 0, top5, nil
 }
 
-//This replaces the sequence tags with the grok formatted tags
+// This replaces the sequence tags with the grok formatted tags
 func replaceTags(pattern string) string {
 	//make sure " are escaped \" before we start
 	//pattern = strings.Replace(pattern, "\"", "\\\"", -1)
@@ -130,7 +130,6 @@ func replaceTags(pattern string) string {
 	return output
 }
 
-//
 func getUpdatedTag(p string, mtc map[string]int, tag string, del string) (string, map[string]int) {
 	tok := ""
 	xchars := len(del)

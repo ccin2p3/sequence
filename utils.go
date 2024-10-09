@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-//Scans the message using the appropriate format
+// Scans the message using the appropriate format
 func ScanMessage(scanner *Scanner, data string, format string) (Sequence, bool, error) {
 	var (
 		seq    Sequence
@@ -44,7 +44,7 @@ func testJson(data string) bool {
 	return false
 }
 
-//Builds the parser from a pattern file or series of pattern files in the same directory.
+// Builds the parser from a pattern file or series of pattern files in the same directory.
 func BuildParser(patfile string) *Parser {
 	parser := NewParser()
 
@@ -114,7 +114,7 @@ func BuildParserFromDb(serviceid string) *Parser {
 	return parser
 }
 
-//Calculate the threshold value to use when exporting patterns from the database.
+// Calculate the threshold value to use when exporting patterns from the database.
 func getThreshold(numTotal int, typ string, val string) int {
 	if typ == "count" {
 		tr, err := strconv.Atoi(val)
@@ -137,7 +137,7 @@ func getThreshold(numTotal int, typ string, val string) int {
 	return 0
 }
 
-//This can be useful for debugging
+// This can be useful for debugging
 func SortLogMessages(lr []LogRecord) []LogRecord {
 	sort.Slice(lr, func(i, j int) bool {
 		if lr[i].Service != lr[j].Service {
@@ -149,8 +149,8 @@ func SortLogMessages(lr []LogRecord) []LogRecord {
 	return lr
 }
 
-//This can be used to sort and inspect the records in order
-//useful for checking the patterns against all the examples
+// This can be used to sort and inspect the records in order
+// useful for checking the patterns against all the examples
 func SortandSaveLogMessages(lr []LogRecord, fname string) {
 	sort.Slice(lr, func(i, j int) bool {
 		if lr[i].Service != lr[j].Service {
@@ -165,7 +165,7 @@ func SortandSaveLogMessages(lr []LogRecord, fname string) {
 	}
 }
 
-//This can be useful to save the service and message in text format.
+// This can be useful to save the service and message in text format.
 func SaveLogMessages(lr LogRecordCollection, fname string) {
 	ofile, _ := OpenOutputFile(fname)
 	defer ofile.Close()

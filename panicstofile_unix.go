@@ -1,6 +1,7 @@
 // Log the panic under unix to the log file
 
-//+build unix
+//go:build unix
+// +build unix
 
 package sequence
 

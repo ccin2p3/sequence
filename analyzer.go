@@ -38,8 +38,8 @@ import (
 // that position is likely variable string, which means it's something we can extract.
 // For example, take a look at the following two messages:
 //
-//   Jan 12 06:49:42 irc sshd[7034]: Accepted password for root from 218.161.81.238 port 4228 ssh2
-//   Jan 12 14:44:48 jlz sshd[11084]: Accepted publickey for jlz from 76.21.0.16 port 36609 ssh2
+//	Jan 12 06:49:42 irc sshd[7034]: Accepted password for root from 218.161.81.238 port 4228 ssh2
+//	Jan 12 14:44:48 jlz sshd[11084]: Accepted publickey for jlz from 76.21.0.16 port 36609 ssh2
 //
 // The first token of each message is a timestamp, and the 3rd token of each message
 // is the literal "sshd". For the literals "irc" and "jlz", they both share a common
@@ -56,11 +56,11 @@ import (
 // messages, which means each of these tokens can be extracted. And finally, we can
 // determine that the single pattern that will match both is:
 //
-//   %time% %string% sshd [ %integer% ] : Accepted %string% for %string% from %ipv4% port %integer% ssh2
+//	%time% %string% sshd [ %integer% ] : Accepted %string% for %string% from %ipv4% port %integer% ssh2
 //
 // If later we add another message to this mix:
 //
-//   Jan 12 06:49:42 irc sshd[7034]: Failed password for root from 218.161.81.238 port 4228 ssh2
+//	Jan 12 06:49:42 irc sshd[7034]: Failed password for root from 218.161.81.238 port 4228 ssh2
 //
 // The Analyzer will determine that the literals "Accepted" in the 1st message, and
 // "Failed" in the 3rd message share a common parent ":" and a common child "password",
@@ -68,7 +68,7 @@ import (
 // After all three messages are analyzed, the final pattern that will match all three
 // messages is:
 //
-//   %time% %string% sshd [ %integer% ] : %string% %string% for %string% from %ipv4% port %integer% ssh2
+//	%time% %string% sshd [ %integer% ] : %string% %string% for %string% from %ipv4% port %integer% ssh2
 type Analyzer struct {
 	root *analyzerNode
 	leaf *analyzerNode
@@ -80,8 +80,8 @@ type Analyzer struct {
 	mu sync.RWMutex
 }
 
-//pattern to be used as the starting block for
-//all conversions
+// pattern to be used as the starting block for
+// all conversions
 type AnalyzerResult struct {
 	Service         models.Service
 	PatternId       string
@@ -116,7 +116,7 @@ type stackAnalyzerNode struct {
 	score int
 }
 
-//Splits a slice of integers into a separated string, the separator is passed to the function.
+// Splits a slice of integers into a separated string, the separator is passed to the function.
 func SplitToString(a []int, sep string) string {
 	if len(a) == 0 {
 		return ""
@@ -129,7 +129,7 @@ func SplitToString(a []int, sep string) string {
 	return strings.Join(b, sep)
 }
 
-//Splits a string of separated numbers to a slice of integers, the separator is passed to the function.
+// Splits a string of separated numbers to a slice of integers, the separator is passed to the function.
 func SplitToInt(s string, sep string) []int {
 	var p []int
 	if len(s) == 0 {
@@ -144,7 +144,7 @@ func SplitToInt(s string, sep string) []int {
 	return b
 }
 
-//Tests the passed log record to see if it should be added to the examples collection for the Analyzer Result.
+// Tests the passed log record to see if it should be added to the examples collection for the Analyzer Result.
 func AddExampleToAnalyzerResult(this *AnalyzerResult, lr LogRecord) {
 	if len(this.Examples) >= 3 {
 		//nothing to here
@@ -163,7 +163,7 @@ func AddExampleToAnalyzerResult(this *AnalyzerResult, lr LogRecord) {
 	}
 }
 
-//This ensures that the same pattern will always have the same id, returns a sha1 hash of the pattern + service name.
+// This ensures that the same pattern will always have the same id, returns a sha1 hash of the pattern + service name.
 func GenerateIDFromString(pattern string, service string) string {
 	h := sha1.New()
 	h.Write([]byte(pattern + service))
@@ -172,8 +172,8 @@ func GenerateIDFromString(pattern string, service string) string {
 	return shaStr
 }
 
-//This calculates the complexity of the pattern, looking at the ratio if non-string tokens to string tokens.
-//This value helps the reviewer of the pattern  filter out the patterns that may be over tokenized.
+// This calculates the complexity of the pattern, looking at the ratio if non-string tokens to string tokens.
+// This value helps the reviewer of the pattern  filter out the patterns that may be over tokenized.
 func CalculatePatternComplexity(seq Sequence, lgt int) float64 {
 
 	var (
@@ -212,7 +212,7 @@ func CalculatePatternComplexity(seq Sequence, lgt int) float64 {
 	return 0.05
 }
 
-//The save threshold prevents messages with a low number of examples from saving to the database
+// The save threshold prevents messages with a low number of examples from saving to the database
 // as they are likely to be poorly formed.
 func getSaveThreshold() int {
 	//Get save threshold from the config

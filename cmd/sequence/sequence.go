@@ -452,7 +452,7 @@ func buildParser() *sequence.Parser {
 				continue
 			}
 			var pos []int
-			seq, _,  err := scanner.Scan(line, true, pos)
+			seq, _, err := scanner.Scan(line, true, pos)
 			if err != nil {
 				log.Fatal(err)
 			}

@@ -15,9 +15,9 @@ import (
 	"time"
 )
 
-//This creates the database from the scripts in the toml file at the location and db type specified.
-//SQLite3 needs cinfo and driver
-//Microsoft SQL Server needs cinfo, driver, path and dbname
+// This creates the database from the scripts in the toml file at the location and db type specified.
+// SQLite3 needs cinfo and driver
+// Microsoft SQL Server needs cinfo, driver, path and dbname
 func CreateDatabase(cinfo string, driver string, path string, dbname string) {
 	database, err := sql.Open(driver, cinfo)
 	if err != nil {
@@ -62,8 +62,8 @@ func CreateDatabase(cinfo string, driver string, path string, dbname string) {
 
 }
 
-//This deletes all the patterns and related data from the database
-//which have a cumulative match count below the passed threshold.
+// This deletes all the patterns and related data from the database
+// which have a cumulative match count below the passed threshold.
 func PurgePatternsfromDatabase(threshold int64) int64 {
 	database, ctx := OpenDbandSetContext()
 	tx, err := database.Begin()
@@ -85,7 +85,7 @@ func PurgePatternsfromDatabase(threshold int64) int64 {
 	return 0
 }
 
-//This opens tha database for use.
+// This opens tha database for use.
 func OpenDbandSetContext() (*sql.DB, context.Context) {
 	// Get a handle to the SQLite database, using mattn/go-sqlite3
 	db, err := sql.Open(config.databaseType, config.connectionInfo)
@@ -99,7 +99,7 @@ func OpenDbandSetContext() (*sql.DB, context.Context) {
 	return db, ctx
 }
 
-//Returns all of the patterns from the database.
+// Returns all of the patterns from the database.
 func getPatternsFromDatabase(db *sql.DB, ctx context.Context) map[string]string {
 	pmap := make(map[string]string)
 	// This pulls 'all' of the patterns from the patterns database
@@ -113,8 +113,8 @@ func getPatternsFromDatabase(db *sql.DB, ctx context.Context) map[string]string 
 	return pmap
 }
 
-//This gets all the patterns complete with examples and service for exporting them to file.
-//The pattern numbers returned are limited by the complexity score and threshold if the values are passed/configured.
+// This gets all the patterns complete with examples and service for exporting them to file.
+// The pattern numbers returned are limited by the complexity score and threshold if the values are passed/configured.
 func GetPatternsWithExamplesFromDatabase(db *sql.DB, ctx context.Context, complexityLevel float64, thresholdType string, thresholdValue string) (map[string]AnalyzerResult, string) {
 	var (
 		patterns models.PatternSlice
@@ -174,7 +174,7 @@ func GetPatternsWithExamplesFromDatabase(db *sql.DB, ctx context.Context, comple
 	return pmap, top5
 }
 
-//This sums the cumulative_match_count column in the pattern table
+// This sums the cumulative_match_count column in the pattern table
 // to allow for calculation of the whether the threshold has been reached or not.
 func getRecordProcessed(db *sql.DB, ctx context.Context) int {
 	// Custom struct for selecting a subset of data
@@ -191,7 +191,7 @@ func getRecordProcessed(db *sql.DB, ctx context.Context) int {
 	return info.MessageSum
 }
 
-//This is used to build the parser trie by service from the patterns for the parsing step.
+// This is used to build the parser trie by service from the patterns for the parsing step.
 func GetPatternsFromDatabaseByService(db *sql.DB, ctx context.Context, sid string) map[string]AnalyzerResult {
 	pmap := make(map[string]AnalyzerResult)
 	svc, err := models.Services(models.ServiceWhere.ID.EQ(sid)).One(ctx, db)
@@ -208,7 +208,7 @@ func GetPatternsFromDatabaseByService(db *sql.DB, ctx context.Context, sid strin
 	return pmap
 }
 
-//This returns all of the current services saved to the database.
+// This returns all of the current services saved to the database.
 func getServicesFromDatabase(db *sql.DB, ctx context.Context) map[string]string {
 	// This pulls 'all' of the services from the services table
 	smap := make(map[string]string)
@@ -222,7 +222,7 @@ func getServicesFromDatabase(db *sql.DB, ctx context.Context) map[string]string 
 	return smap
 }
 
-//This saves an individual service record to the database.
+// This saves an individual service record to the database.
 func addService(ctx context.Context, tx *sql.Tx, id string, name string) {
 	var s models.Service
 	s.ID = id
@@ -234,7 +234,7 @@ func addService(ctx context.Context, tx *sql.Tx, id string, name string) {
 	}
 }
 
-//this save a pattern to the database, with its example patterns.
+// this save a pattern to the database, with its example patterns.
 func addPattern(ctx context.Context, tx *sql.Tx, result AnalyzerResult, tr int) bool {
 	if tr > result.ExampleCount {
 		//do not add the pattern
@@ -262,7 +262,7 @@ func SaveIgnoredPatterns(pattids []string) {
 	}
 }
 
-//This updates an existing pattern record and marks it to be ignored.
+// This updates an existing pattern record and marks it to be ignored.
 func ignorePattern(ctx context.Context, db *sql.DB, patternid string) {
 	p, _ := models.FindPattern(ctx, db, patternid)
 	p.IgnorePattern = true
@@ -272,7 +272,7 @@ func ignorePattern(ctx context.Context, db *sql.DB, patternid string) {
 	}
 }
 
-//This updates an existing pattern record and updates any related examples.
+// This updates an existing pattern record and updates any related examples.
 func updatePattern(ctx context.Context, tx *sql.Tx, result AnalyzerResult) {
 	p, _ := models.FindPattern(ctx, tx, result.PatternId)
 	p.DateLastMatched = time.Now()
@@ -301,7 +301,7 @@ func updatePattern(ctx context.Context, tx *sql.Tx, result AnalyzerResult) {
 	}
 }
 
-//This inserts an example record into the database.
+// This inserts an example record into the database.
 func insertExample(ctx context.Context, tx *sql.Tx, lr LogRecord, pid string, sid string) {
 	id, err := uuid.NewV4()
 	if err != nil {
@@ -314,7 +314,7 @@ func insertExample(ctx context.Context, tx *sql.Tx, lr LogRecord, pid string, si
 	}
 }
 
-//This updates the patterns. services and examples in the database.
+// This updates the patterns. services and examples in the database.
 func SaveExistingToDatabase(rmap map[string]AnalyzerResult) {
 	db, ctx := OpenDbandSetContext()
 	defer db.Close()
@@ -356,7 +356,7 @@ func SaveExistingToDatabase(rmap map[string]AnalyzerResult) {
 
 }
 
-//This saves the new patterns and related data to the database
+// This saves the new patterns and related data to the database
 func SaveToDatabase(amap map[string]AnalyzerResult) (int, int) {
 	var (
 		new   = 0

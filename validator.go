@@ -9,9 +9,9 @@ import (
 
 //validation of the argument input from the command line
 
-//input format
-//the in-format is for supporting a feed that has the service and the message provided.
-//this can be either txt or json
+// input format
+// the in-format is for supporting a feed that has the service and the message provided.
+// this can be either txt or json
 func ValidateInformat(informat string) string {
 	if (informat == "json") || (informat == "txt") {
 		return ""
@@ -22,7 +22,7 @@ func ValidateInformat(informat string) string {
 	return informat + " is not a supported input format type, please select either json or txt"
 }
 
-//output format
+// output format
 func ValidateOutformat(outformat string) string {
 	outformats := strings.Split(outformat, ",")
 	//open the output files for saving data and add any headers
@@ -44,7 +44,6 @@ func ValidateOutsystem(outsystem string) string {
 	return outsystem + " is not a supported out system type, please select either patterndb or grok"
 }
 
-//
 func ValidateOutFormatWithFile(outfile string, outformat string) string {
 	outformats := strings.Split(outformat, ",")
 	if len(outformats) > 1 && outfile == "" {
@@ -53,7 +52,7 @@ func ValidateOutFormatWithFile(outfile string, outformat string) string {
 	return ""
 }
 
-//for the create database
+// for the create database
 func ValidateOutFile(outfile string) string {
 	if outfile == "" {
 		return "Out file name must be specified for this method"
@@ -101,8 +100,8 @@ func ValidateThresholdType(thresholdType string) string {
 	}
 }
 
-//if type is count it just needs to be 0 or greater
-//if type is percent it needs to be a float between 0 and 1.
+// if type is count it just needs to be 0 or greater
+// if type is percent it needs to be a float between 0 and 1.
 func ValidateThresholdValue(thresholdType string, thresholdValue string) string {
 	switch thresholdType {
 	case "count":

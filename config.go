@@ -57,7 +57,7 @@ var (
 	logger          *StandardLogger
 )
 
-//Reads the sequence.toml file and loads the values into a struct for use as the program runs.
+// Reads the sequence.toml file and loads the values into a struct for use as the program runs.
 func ReadConfig(file string) error {
 	var configInfo struct {
 		Version             string
@@ -165,34 +165,34 @@ func ReadConfig(file string) error {
 	return nil
 }
 
-//Returns the regular expression for patterndb matching the passed time format identifier.
+// Returns the regular expression for patterndb matching the passed time format identifier.
 func GetTimeSettingsRegExValue(id string) (string, bool) {
 	f, ok := timesettings.regex[id]
 	return f, ok
 }
 
-//Returns the regular expression for grok matching the passed time format identifier.
+// Returns the regular expression for grok matching the passed time format identifier.
 func GetTimeSettingsGrokValue(id string) (string, bool) {
 	f, ok := timesettings.grok[id]
 	return f, ok
 }
 
-//globally sets the logging for the application
+// globally sets the logging for the application
 func SetLogger(log *StandardLogger) {
 	logger = log
 }
 
-//Returns the flag to signal if sequence is configured to use a database or not.
+// Returns the flag to signal if sequence is configured to use a database or not.
 func GetUseDatabase() bool {
 	return config.useDatabase
 }
 
-//Returns the type of threshold to be calculated
+// Returns the type of threshold to be calculated
 func GetThresholdType() string {
 	return config.matchThresholdType
 }
 
-//Returns the value of threshold to be calculated
+// Returns the value of threshold to be calculated
 func GetThresholdValue() string {
 	return config.matchThresholdValue
 }

@@ -87,7 +87,7 @@ func (this *parseNode) String() string {
 
 // Add will add a single pattern sequence to the parser tree. This effectively
 // builds the parser tree so it can be used for parsing later.
-//func (this *Parser) Add(s string) error {
+// func (this *Parser) Add(s string) error {
 func (this *Parser) Add(seq Sequence) error {
 	this.mu.Lock()
 	defer this.mu.Unlock()
@@ -202,7 +202,7 @@ func (this *Parser) Add(seq Sequence) error {
 
 // Parse will take the message sequence supplied and go through the parser tree to
 // find the matching pattern sequence. If found, the pattern sequence is returned.
-//func (this *Parser) Parse(s string) (Sequence, error) {
+// func (this *Parser) Parse(s string) (Sequence, error) {
 func (this *Parser) Parse(seq Sequence) (Sequence, error) {
 	this.mu.RLock()
 	defer this.mu.RUnlock()

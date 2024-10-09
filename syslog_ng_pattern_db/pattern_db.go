@@ -1,20 +1,21 @@
-//This package is solely for the transformation and the output to file of sequence patterns found in server logs
-//for use with Syslog-ng's patterndb parser. The transformation is solid, but not perfect and this is designed to assist
-//a system administrator to create the patterns, not to be a full automation of the process.
-//The outputs for patterndb have been tested with a live patterndb and pass at a rate close to 80% with the pdb test tool.
-//The variable names usually need a bit of review as they can be string, string1 etc as the tool can detect a variable, but not what the variable is eg:server name.
+// This package is solely for the transformation and the output to file of sequence patterns found in server logs
+// for use with Syslog-ng's patterndb parser. The transformation is solid, but not perfect and this is designed to assist
+// a system administrator to create the patterns, not to be a full automation of the process.
+// The outputs for patterndb have been tested with a live patterndb and pass at a rate close to 80% with the pdb test tool.
+// The variable names usually need a bit of review as they can be string, string1 etc as the tool can detect a variable, but not what the variable is eg:server name.
 package syslog_ng_pattern_db
 
 import (
 	"fmt"
-	"github.com/BurntSushi/toml"
-	"gitlab.in2p3.fr/cc-in2p3-system/sequence"
 	"index/suffixarray"
 	"os"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/BurntSushi/toml"
+	"gitlab.in2p3.fr/cc-in2p3-system/sequence"
 )
 
 var (
@@ -26,7 +27,7 @@ var (
 	logger *sequence.StandardLogger
 )
 
-//Allows the user to set the logger to a global instance.
+// Allows the user to set the logger to a global instance.
 func SetLogger(log *sequence.StandardLogger) {
 	logger = log
 }
@@ -52,9 +53,9 @@ func readConfig(file string) error {
 	return nil
 }
 
-//this replaces the sequence tags with the syslog-ng tags
-//first we replace the easy ones that are surrounded by spaces
-//then we deal with the compound ones
+// this replaces the sequence tags with the syslog-ng tags
+// first we replace the easy ones that are surrounded by spaces
+// then we deal with the compound ones
 func replaceTags(pattern string) string {
 	if len(pattern) < 1 {
 		return pattern
@@ -235,9 +236,9 @@ func getTimeRegex(p string) (string, string) {
 	return p, rg
 }
 
-//This is the function that drives the output to file.
-//The user can pass the pattern map if no database is used or
-//pass the map created during the analysis
+// This is the function that drives the output to file.
+// The user can pass the pattern map if no database is used or
+// pass the map created during the analysis
 func OutputToFiles(outformat string, outfile string, config string, complexitylevel float64, cmap map[string]sequence.AnalyzerResult, thresholdType string, thresholdValue string) (int, string, error) {
 
 	var (
@@ -351,7 +352,7 @@ func OutputToFiles(outformat string, outfile string, config string, complexityle
 	return count, top5, err
 }
 
-//This function extracts the values of the tokens for the test examples
+// This function extracts the values of the tokens for the test examples
 func extractTestValuesForTokens(message string, ar sequence.AnalyzerResult) (map[string]map[string]string, error) {
 	var (
 		tok string

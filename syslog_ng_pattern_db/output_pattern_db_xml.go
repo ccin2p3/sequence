@@ -3,12 +3,13 @@ package syslog_ng_pattern_db
 import (
 	"encoding/xml"
 	"fmt"
+	"strconv"
+
 	"gitlab.in2p3.fr/cc-in2p3-system/sequence"
 	"gitlab.in2p3.fr/cc-in2p3-system/sequence/models"
-	"strconv"
 )
 
-//This represents a ruleset section in the sys-log ng yaml file
+// This represents a ruleset section in the sys-log ng yaml file
 type xPatternDB struct {
 	XMLName  xml.Name   `xml:"patterndb"`
 	Version  string     `xml:"version,attr"`
@@ -16,7 +17,7 @@ type xPatternDB struct {
 	Rulesets []xRuleset `xml:"ruleset"`
 }
 
-//This represents a ruleset section in the sys-log ng yaml file
+// This represents a ruleset section in the sys-log ng yaml file
 type xRuleset struct {
 	ID       string    `xml:"id,attr"`
 	Name     string    `xml:"name,attr"`
@@ -24,12 +25,12 @@ type xRuleset struct {
 	Rules    xRules    `xml:"rules"`
 }
 
-//this is needed for the xml to format properly
+// this is needed for the xml to format properly
 type xRules struct {
 	Rules []xRule `xml:"rule"`
 }
 
-//This represents a rule section in the sys-log ng yaml file
+// This represents a rule section in the sys-log ng yaml file
 type xRule struct {
 	XMLName  xml.Name    `xml:"rule"`
 	Class    string      `xml:"class,attr"`
@@ -39,7 +40,7 @@ type xRule struct {
 	ID       string      `xml:"id,attr"`
 }
 
-//this is needed for the xml to format properly
+// this is needed for the xml to format properly
 type xPatterns struct {
 	Patterns []string `xml:"pattern"`
 }
@@ -48,7 +49,7 @@ type xPattern struct {
 	Pattern string `xml:"pattern"`
 }
 
-//this is needed for the xml to format properly
+// this is needed for the xml to format properly
 type xExamples struct {
 	Examples []xExample `xml:"example"`
 }
@@ -85,8 +86,8 @@ type xRuleValue struct {
 	Value   string   `xml:",chardata"`
 }
 
-//This method takes the path to the file output by the analyzer as in and
-//converts it to Yaml and saves in the out path.
+// This method takes the path to the file output by the analyzer as in and
+// converts it to Yaml and saves in the out path.
 func convertToXml(document xPatternDB) string {
 	// turn the document into XML format
 	y, _ := xml.MarshalIndent(document, "  ", "   ")
