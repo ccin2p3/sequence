@@ -40,9 +40,9 @@ type yRuleset struct {
 }
 
 type yRuleExample struct {
-	Program     string            `yaml:"program"`
-	TestMessage string            `yaml:"test_message"`
-	TextValues  map[string]string `yaml:"test_values"`
+	Program     string                       `yaml:"program"`
+	TestMessage string                       `yaml:"test_message"`
+	TextValues  map[string]map[string]string `yaml:"test_values"`
 }
 
 func saveAsYaml(oFile *os.File, db yPatternDB) error {
@@ -83,7 +83,7 @@ func buildRule(result sequence.AnalyzerResult, rsName string) yRule {
 		m, err := extractTestValuesForTokens(ex.Message, result)
 		if err != nil {
 			//make an empty map, log an error and continue
-			m = make(map[string]string)
+			m = make(map[string]map[string]string)
 			logger.HandleError(fmt.Sprintf("Unable to make test_values map for examples for pattern %s", result.PatternId))
 		}
 		example := yRuleExample{ex.Service, ex.Message, m}

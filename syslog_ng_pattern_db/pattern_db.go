@@ -352,13 +352,13 @@ func OutputToFiles(outformat string, outfile string, config string, complexityle
 }
 
 //This function extracts the values of the tokens for the test examples
-func extractTestValuesForTokens(message string, ar sequence.AnalyzerResult) (map[string]string, error) {
+func extractTestValuesForTokens(message string, ar sequence.AnalyzerResult) (map[string]map[string]string, error) {
 	var (
 		tok string
 	)
 	scanner := sequence.NewScanner()
 	parser := sequence.NewParser()
-	m := make(map[string]string)
+	m := make(map[string]map[string]string)
 	//no tags to find
 	if ar.TagPositions == "" {
 		return m, nil
@@ -381,10 +381,12 @@ func extractTestValuesForTokens(message string, ar sequence.AnalyzerResult) (map
 				tok = checkForCustomFieldName(p.Tag.String())
 			}
 			if t, ok := mtc[tok]; ok {
-				m[tok+strconv.Itoa(t)] = p.Value
+				m[tok+strconv.Itoa(t)] = make(map[string]string)
+				m[tok+strconv.Itoa(t)]["value"] = p.Value
 				mtc[tok] = t + 1
 			} else {
-				m[tok] = p.Value
+				m[tok] = make(map[string]string)
+				m[tok]["value"] = p.Value
 				mtc[tok] = 1
 			}
 		}
